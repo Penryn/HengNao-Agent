@@ -54,7 +54,6 @@ func (h *GetRelevantHighlightsService) Run(req *hertz_gen.GetRelevantHighlightsR
 		SetResult(result).
 		Post(conf.GetConf().Api.Url)
 	var inner utils.InnerAgendas
-	fmt.Println(result.Data.Results.TopRecommendedAgendas)
 	err = json.Unmarshal([]byte(result.Data.Results.TopRecommendedAgendas), &inner)
 	if err != nil {
 		fmt.Println("Error unmarshalling JSON:", err)
