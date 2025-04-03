@@ -1,0 +1,37 @@
+hertz:
+  service: "meeting_agent"
+  address: ":8080"
+  enable_pprof: true
+  enable_gzip: true
+  enable_access_log: true
+  log_level: info
+  log_file_name: "log/hertz.log"
+  log_max_size: 10
+  log_max_age: 3
+  log_max_backups: 50
+
+mysql:
+  db_host: "127.0.0.1"
+  db_port: 3306
+  db_user: "root"
+  db_password: "root"
+  db_name: "meeting_agent"
+
+  dsn: "%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local"
+  max_idle_conns: 20
+  max_open_conns: 100
+  conn_max_lifetime: 10
+
+
+redis:
+  address: "127.0.0.1:6379"
+  username: ""
+  password: ""
+  db: 0
+
+
+api:
+  url : "https://www.das-ai.com/open/api/v2/agent/execute"
+  key : "hengnaoMZrxRBybfan2PAoCP5w7"
+  secret : "p12vcw48birifr1h9b87ql678fbb8eqy"
+  get_relevant_highlights : "b23472bd-5695-486a-b7bb-32498c816efe"

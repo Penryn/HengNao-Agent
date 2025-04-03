@@ -1,0 +1,2 @@
+ CREATE DATABASE IF NOT EXISTS `meeting_agent`
+    DEFAULT CHARACTER SET = 'utf8mb4';;

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package meeting_agent;
+
+import "api.proto";
+
+option go_package = "/meeting_agent";
+
+
+// 推荐请求消息
+message GetRelevantHighlightsReq {
+  repeated string user_favor = 1 [(api.body) = "userFavor,required"];  // 用户偏好关键词
+  repeated EventInform eventInform = 2 [(api.body) = "eventInform,required"]; // 会议列表
+}
+
+// 会议信息
+message EventInform {
+  string name = 1 [(api.body) = "name,required"];                 // 会议名称
+  repeated string keywords = 2 [(api.body) = "keywords,required"];    // 会议关键词
+  repeated string highlights = 3 [(api.body) = "highlights,required"];  // 会议亮点
+}
+
+// 推荐响应消息
+message GetRelevantHighlightsResp {
+  repeated string top_recommendations = 1; // 推荐的会议列表
+}
+
+service MeetingService {
+    rpc GetRelevantHighlights(GetRelevantHighlightsReq) returns (GetRelevantHighlightsResp) {
+        option (api.post) = "/api/meeting/recommendation";
+    }
+}
