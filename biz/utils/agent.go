@@ -22,10 +22,10 @@ type Data struct {
 }
 
 type TokenUsage struct {
-	CompletionTokens         int                        `json:"completion_tokens"`
-	PromptTokens             int                        `json:"prompt_tokens"`
-	TotalTokens              int                        `json:"total_tokens"`
-	CompletionCTokensDetails []CompletionCTokensDetails `json:"completion_tokens_details"`
+	CompletionTokens         int                      `json:"completion_tokens"`
+	PromptTokens             int                      `json:"prompt_tokens"`
+	TotalTokens              int                      `json:"total_tokens"`
+	CompletionCTokensDetails CompletionCTokensDetails `json:"completion_tokens_details"`
 }
 
 type CompletionCTokensDetails struct {
@@ -51,8 +51,6 @@ type AgentFlowResp struct {
 	Code int      `json:"code"`
 	Data FlowData `json:"data"`
 }
-
-
 
 type FlowData struct {
 	Model     string         `json:"model"`

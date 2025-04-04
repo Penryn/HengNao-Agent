@@ -5,8 +5,11 @@ import (
 	"fmt"
 	"github.com/cloudwego/hertz/pkg/common/json"
 	"github.com/google/uuid"
+	"meeting_agent/biz/dal/mysql"
+	"meeting_agent/biz/model"
 	"meeting_agent/biz/utils"
 	"meeting_agent/conf"
+	"strings"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	hertz_gen "meeting_agent/hertz_gen"
@@ -37,16 +40,21 @@ type InnerAgendas struct {
 }
 
 func (h *GetRelevantHighlightsService) Run(req *hertz_gen.GetRelevantHighlightsReq) (resp *hertz_gen.GetRelevantHighlightsResp, err error) {
+	q := model.NewMeetingQuery(h.Context, mysql.DB)
 	client := utils.RestyClient
 	u := uuid.New()
-	eventInform := make([]EventInform, 0, len(req.EventInform))
 	key := conf.GetConf().Api.Key
 	secret := conf.GetConf().Api.Secret
-	for _, event := range req.EventInform {
+	meetings, num, err := q.GetAll(0, 0)
+	eventInform := make([]EventInform, 0, num)
+	if err != nil {
+		return nil, err
+	}
+	for _, m := range meetings {
 		eventInform = append(eventInform, EventInform{
-			Name:       event.Name,
-			Keywords:   event.Keywords,
-			Highlights: event.Highlights,
+			Name:       m.Name,
+			Keywords:   strings.Split(m.KeyWords, "+"),
+			Highlights: strings.Split(m.Highlights, "+"),
 		})
 	}
 	inputs := GetRelevantHighlightsInputs{

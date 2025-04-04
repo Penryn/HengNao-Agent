@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"go.uber.org/zap"
 	"meeting_agent/biz/dal"
 	"time"
 
@@ -26,6 +27,13 @@ import (
 )
 
 func main() {
+	var loc *time.Location
+	loc, err := time.LoadLocation("Asia/Shanghai")
+	if err != nil {
+		hlog.Error("Failed to load location, using fixed zone instead", zap.Error(err))
+		loc = time.FixedZone("CST", 8*60*60)
+	}
+	time.Local = loc
 	dal.Init()
 	address := conf.GetConf().Hertz.Address
 	u.InitRestyClient()

@@ -10,15 +10,9 @@ option go_package = "/meeting_agent";
 // 推荐请求消息
 message GetRelevantHighlightsReq {
   repeated string user_favor = 1 [(api.body) = "userFavor,required"];  // 用户偏好关键词
-  repeated EventInform eventInform = 2 [(api.body) = "eventInform,required"]; // 会议列表
 }
 
-// 会议信息
-message EventInform {
-  string name = 1 [(api.body) = "name,required"];                 // 会议名称
-  repeated string keywords = 2 [(api.body) = "keywords,required"];    // 会议关键词
-  repeated string highlights = 3 [(api.body) = "highlights,required"];  // 会议亮点
-}
+
 
 // 推荐响应消息
 message GetRelevantHighlightsResp {
@@ -27,12 +21,13 @@ message GetRelevantHighlightsResp {
 
 // 会议纪要请求消息
 message  GetMeetingMinutesReq {
-  string Input = 1 [(api.body) = "input,required"]; // 会议纪要输入
+  string Content = 1 [(api.body) = "content,required"]; // 会议纪要输入
+  uint64 Id = 2 [(api.body) = "id"]; // 会议ID
 }
 
 // 会议纪要响应消息
 message GetMeetingMinutesResp {
-  string Output = 1 [(api.body) = "output,required"]; // 会议纪要输出
+
 }
 
 
