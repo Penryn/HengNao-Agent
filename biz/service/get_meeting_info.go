@@ -5,6 +5,7 @@ import (
 	"meeting_agent/biz/dal/mysql"
 	"meeting_agent/biz/model"
 	"strings"
+	"time"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	hertz_gen "meeting_agent/hertz_gen"
@@ -30,7 +31,7 @@ func (h *GetMeetingInfoService) Run(req *hertz_gen.GetMeetingInfoReq) (resp *her
 			Id:         m.ID,
 			Name:       m.Name,
 			Location:   m.Location,
-			Time:       m.Time.Format("2006-01-02 15:04:05"),
+			Time:       m.Time.Format(time.DateTime),
 			KeyWords:   strings.Split(m.KeyWords, "+"),
 			Highlights: strings.Split(m.Highlights, "+"),
 			Content:    m.Content,

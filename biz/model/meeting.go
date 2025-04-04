@@ -52,7 +52,7 @@ func (m *MeetingQuery) GetById(meetingId uint64) (meeting Meeting, err error) {
 	return
 }
 
-func (m *MeetingQuery) GetAll(num int32, size int64) (meetings []Meeting, total int64, err error) {
+func (m *MeetingQuery) GetAll(num uint64, size uint64) (meetings []Meeting, total int64, err error) {
 	// 首先计算总数
 	err = m.db.WithContext(m.ctx).Model(&Meeting{}).
 		Count(&total).Error
@@ -62,7 +62,7 @@ func (m *MeetingQuery) GetAll(num int32, size int64) (meetings []Meeting, total 
 	// 然后查询数据
 	query := m.db.WithContext(m.ctx).Model(&Meeting{}).Order("created_at desc")
 	if num != 0 || size != 0 {
-		query = query.Limit(int(size)).Offset(int(num))
+		query = query.Limit(int(size)).Offset(int(num-1) * int(size))
 	}
 	err = query.Find(&meetings).Error
 	return meetings, total, err

@@ -57,7 +57,8 @@ message GetMeetingListReq {
 }
 
 message GetMeetingListResp {
-  repeated MeetingInfo MeetingList = 1 [(api.body) = "meeting_list"]; // 会议列表
+  uint64 Total = 1 [(api.body) = "total"]; // 总记录数
+  repeated MeetingInfo MeetingList = 2 [(api.body) = "meeting_list"]; // 会议列表
 }
 
 message MeetingInfo {
