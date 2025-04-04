@@ -30,3 +30,18 @@ func _getmeetingminutesMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
+
+func _createmeetingMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _getmeetinglistMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _getmeetinginfoMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}

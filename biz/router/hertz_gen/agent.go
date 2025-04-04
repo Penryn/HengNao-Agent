@@ -21,8 +21,11 @@ func Register(r *server.Hertz) {
 		_api := root.Group("/api", _apiMw()...)
 		{
 			_meeting := _api.Group("/meeting", _meetingMw()...)
-			_meeting.POST("/minutes", append(_getmeetingminutesMw(), hertz_gen.GetMeetingMinutes)...)
-			_meeting.POST("/recommendation", append(_getrelevanthighlightsMw(), hertz_gen.GetRelevantHighlights)...)
+			_meeting.POST("/create", append(_createmeetingMw(), hertz_gen.CreateMeeting)...)
+			_meeting.GET("/info", append(_getmeetinginfoMw(), hertz_gen.GetMeetingInfo)...)
+			_meeting.GET("/list", append(_getmeetinglistMw(), hertz_gen.GetMeetingList)...)
+			_meeting.GET("/minutes", append(_getmeetingminutesMw(), hertz_gen.GetMeetingMinutes)...)
+			_meeting.GET("/recommendation", append(_getrelevanthighlightsMw(), hertz_gen.GetRelevantHighlights)...)
 		}
 	}
 }

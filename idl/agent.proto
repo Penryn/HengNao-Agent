@@ -36,11 +36,64 @@ message GetMeetingMinutesResp {
 }
 
 
+
+
+message CreateMeetingReq {
+  string Name = 1 [(api.body) = "name,required"];                 // 会议名称（必填）
+  string Location = 2 [(api.body) = "location"];                  // 会议地点（可选）
+  string Time = 3 [(api.body) = "time,required"];                 // 会议时间（必填，格式建议使用 ISO8601）
+  repeated string KeyWords = 4 [(api.body) = "keywords"];         // 关键词（可选）
+  repeated string Highlights = 5 [(api.body) = "highlights"];     // 会议要点（可选）
+}
+
+// 会议创建响应消息
+message CreateMeetingResp {
+  uint64 Id = 1 ;                     // 会议ID
+}
+
+message GetMeetingListReq {
+  uint64 PageNum = 1 [(api.body) = "page_num"]; // 页码
+  uint64 PageSize = 2 [(api.body) = "page_size"]; // 每页大小
+}
+
+message GetMeetingListResp {
+  repeated MeetingInfo MeetingList = 1 [(api.body) = "meeting_list"]; // 会议列表
+}
+
+message MeetingInfo {
+  uint64 Id = 1 [(api.body) = "id"];                      // 会议ID
+  string Name = 2 [(api.body) = "name"];                  // 会议名称
+  string Location = 3 [(api.body) = "location"];          // 会议地点
+  string Time = 4 [(api.body) = "time"];                  // 会议时间
+  repeated string KeyWords = 5 [(api.body) = "keywords"];          // 关键词
+  repeated string Highlights = 6 [(api.body) = "highlights"];      // 会议要点
+  string Content = 7 [(api.body) = "content"];            // 会议内容
+  string Minutes = 8 [(api.body) = "minutes"];            // 会议纪要
+}
+
+message GetMeetingInfoReq {
+  uint64 Id = 1 [(api.body) = "id"]; // 会议ID
+}
+
+message GetMeetingInfoResp {
+  MeetingInfo Info = 1 [(api.body) = "info"]; // 会议详情
+}
+
+
 service MeetingService {
-    rpc GetRelevantHighlights(GetRelevantHighlightsReq) returns (GetRelevantHighlightsResp) {
-        option (api.post) = "/api/meeting/recommendation";
-    }
-    rpc GetMeetingMinutes(GetMeetingMinutesReq) returns (GetMeetingMinutesResp) {
-        option (api.post) = "/api/meeting/minutes";
-    }
+  rpc GetRelevantHighlights(GetRelevantHighlightsReq) returns (GetRelevantHighlightsResp) {
+    option (api.get) = "/api/meeting/recommendation";
+  }
+  rpc GetMeetingMinutes(GetMeetingMinutesReq) returns (GetMeetingMinutesResp) {
+    option (api.get) = "/api/meeting/minutes";
+  }
+  rpc CreateMeeting(CreateMeetingReq) returns (CreateMeetingResp) {
+    option (api.post) = "/api/meeting/create";
+  }
+  rpc GetMeetingList(GetMeetingListReq) returns (GetMeetingListResp) {
+    option (api.get) = "/api/meeting/list";
+  }
+  rpc GetMeetingInfo(GetMeetingInfoReq) returns (GetMeetingInfoResp) {
+    option (api.get) = "/api/meeting/info";
+  }
 }

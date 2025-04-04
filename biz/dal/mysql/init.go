@@ -5,6 +5,7 @@ import (
 	"github.com/cloudwego/hertz/pkg/common/hlog"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"meeting_agent/biz/model"
 	"meeting_agent/conf"
 	"time"
 )
@@ -41,7 +42,7 @@ func Init() {
 	sqlDB.SetConnMaxLifetime(time.Duration(conf.GetConf().MySQL.ConnMaxLifetime) * time.Second)
 
 	// 自动迁移
-	if err := db.AutoMigrate(); err != nil {
+	if err := db.AutoMigrate(&model.Meeting{}); err != nil {
 		panic(err)
 	}
 	hlog.Infof("MySQL 初始化成功, DSN: %s", dsn)
