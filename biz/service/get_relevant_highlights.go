@@ -21,26 +21,42 @@ func NewGetRelevantHighlightsService(Context context.Context, RequestContext *ap
 	return &GetRelevantHighlightsService{RequestContext: RequestContext, Context: Context}
 }
 
+type GetRelevantHighlightsInputs struct {
+	UserFavor   []string      `json:"userFavor"`
+	EventInform []EventInform `json:"eventInform"`
+}
+
+type EventInform struct {
+	Name       string   `json:"name"`
+	Keywords   []string `json:"keywords"`
+	Highlights []string `json:"highlights"`
+}
+
+type InnerAgendas struct {
+	TopRecommendedAgendas []string `json:"top_recommended_agendas"`
+}
+
 func (h *GetRelevantHighlightsService) Run(req *hertz_gen.GetRelevantHighlightsReq) (resp *hertz_gen.GetRelevantHighlightsResp, err error) {
 	client := utils.RestyClient
 	u := uuid.New()
-	eventInform := make([]utils.EventInform, 0, len(req.EventInform))
+	eventInform := make([]EventInform, 0, len(req.EventInform))
 	key := conf.GetConf().Api.Key
 	secret := conf.GetConf().Api.Secret
 	for _, event := range req.EventInform {
-		eventInform = append(eventInform, utils.EventInform{
+		eventInform = append(eventInform, EventInform{
 			Name:       event.Name,
 			Keywords:   event.Keywords,
 			Highlights: event.Highlights,
 		})
 	}
-	inputs := utils.Inputs{
+	inputs := GetRelevantHighlightsInputs{
 		UserFavor:   req.UserFavor,
 		EventInform: eventInform,
 	}
 	data := utils.AgentReq{
 		SID:    u.String(),
 		ID:     conf.GetConf().Api.GetRelevantHighlights,
+		Stream: false,
 		Inputs: inputs,
 	}
 	result := &utils.AgentResp{}
@@ -53,8 +69,8 @@ func (h *GetRelevantHighlightsService) Run(req *hertz_gen.GetRelevantHighlightsR
 		SetBody(data).
 		SetResult(result).
 		Post(conf.GetConf().Api.Url)
-	var inner utils.InnerAgendas
-	err = json.Unmarshal([]byte(result.Data.Results.TopRecommendedAgendas), &inner)
+	var inner InnerAgendas
+	err = json.Unmarshal([]byte(result.Data.Results.Output), &inner)
 	if err != nil {
 		fmt.Println("Error unmarshalling JSON:", err)
 		return nil, err

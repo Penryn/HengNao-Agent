@@ -3,7 +3,8 @@ package utils
 type AgentReq struct {
 	SID    string `json:"sid"`
 	ID     string `json:"id"`
-	Inputs Inputs `json:"inputs"`
+	Stream bool   `json:"stream"`
+	Inputs any    `json:"inputs"`
 }
 
 type AgentResp struct {
@@ -12,17 +13,6 @@ type AgentResp struct {
 	Flag int    `json:"flag"`
 	Data Data   `json:"data"`
 	TID  string `json:"tid"`
-}
-
-type Inputs struct {
-	UserFavor   []string      `json:"userFavor"`
-	EventInform []EventInform `json:"eventInform"`
-}
-
-type EventInform struct {
-	Name       string   `json:"name"`
-	Keywords   []string `json:"keywords"`
-	Highlights []string `json:"highlights"`
 }
 
 type Data struct {
@@ -53,9 +43,25 @@ type Message struct {
 }
 
 type Results struct {
-	TopRecommendedAgendas string `json:"top_recommended_agendas"`
+	Output string `json:"output"`
 }
 
-type InnerAgendas struct {
-	TopRecommendedAgendas []string `json:"top_recommended_agendas"`
+type AgentFlowResp struct {
+	Msg  string   `json:"msg"`
+	Code int      `json:"code"`
+	Data FlowData `json:"data"`
+}
+
+
+
+type FlowData struct {
+	Model     string         `json:"model"`
+	Type      string         `json:"type"`
+	From      string         `json:"from"`
+	Name      string         `json:"name"`
+	TimeStamp string         `json:"time_stamp"`
+	MessageID string         `json:"message_id"`
+	Content   string         `json:"content"`
+	Result    map[string]any `json:"result"`
+	NodeID    string         `json:"node_id"`
 }

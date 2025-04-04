@@ -25,3 +25,8 @@ func _getrelevanthighlightsMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
+
+func _getmeetingminutesMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}

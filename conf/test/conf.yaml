@@ -1,6 +1,6 @@
 hertz:
   service: "meeting_agent"
-  address: ":8080"
+  address: ":8081"
   enable_pprof: true
   enable_gzip: true
   enable_access_log: true
@@ -35,3 +35,4 @@ api:
   key : "hengnaoMZrxRBybfan2PAoCP5w7"
   secret : "p12vcw48birifr1h9b87ql678fbb8eqy"
   get_relevant_highlights : "b23472bd-5695-486a-b7bb-32498c816efe"
+  get_meeting_minutes : "87702c8f-a3ec-4939-a81b-d587281112fd"

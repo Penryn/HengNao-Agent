@@ -25,8 +25,22 @@ message GetRelevantHighlightsResp {
   repeated string top_recommendations = 1; // 推荐的会议列表
 }
 
+// 会议纪要请求消息
+message  GetMeetingMinutesReq {
+  string Input = 1 [(api.body) = "input,required"]; // 会议纪要输入
+}
+
+// 会议纪要响应消息
+message GetMeetingMinutesResp {
+  string Output = 1 [(api.body) = "output,required"]; // 会议纪要输出
+}
+
+
 service MeetingService {
     rpc GetRelevantHighlights(GetRelevantHighlightsReq) returns (GetRelevantHighlightsResp) {
         option (api.post) = "/api/meeting/recommendation";
+    }
+    rpc GetMeetingMinutes(GetMeetingMinutesReq) returns (GetMeetingMinutesResp) {
+        option (api.post) = "/api/meeting/minutes";
     }
 }

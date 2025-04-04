@@ -21,6 +21,7 @@ func Register(r *server.Hertz) {
 		_api := root.Group("/api", _apiMw()...)
 		{
 			_meeting := _api.Group("/meeting", _meetingMw()...)
+			_meeting.POST("/minutes", append(_getmeetingminutesMw(), hertz_gen.GetMeetingMinutes)...)
 			_meeting.POST("/recommendation", append(_getrelevanthighlightsMw(), hertz_gen.GetRelevantHighlights)...)
 		}
 	}

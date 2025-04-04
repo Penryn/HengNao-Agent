@@ -30,3 +30,23 @@ func GetRelevantHighlights(ctx context.Context, c *app.RequestContext) {
 
 	utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
 }
+
+// GetMeetingMinutes .
+// @router /api/meeting/minutes [POST]
+func GetMeetingMinutes(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req hertz_gen.GetMeetingMinutesReq
+	err = c.BindAndValidate(&req)
+	if err != nil {
+		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+		return
+	}
+
+	resp, err := service.NewGetMeetingMinutesService(ctx, c).Run(&req)
+
+	if err != nil {
+		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+		return
+	}
+	utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
+}
