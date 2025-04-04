@@ -76,7 +76,6 @@ message GetMeetingInfoResp {
 }
 
 message ChatMeetingReq {
-  string input = 1 [(api.body) = "input"]; // 聊天内容
 }
 
 message ChatMeetingResp {

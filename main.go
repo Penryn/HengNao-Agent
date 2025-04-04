@@ -38,7 +38,6 @@ func main() {
 	address := conf.GetConf().Hertz.Address
 	u.InitRestyClient()
 	h := server.New(server.WithHostPorts(address))
-
 	registerMiddleware(h)
 
 	// add a ping route to test
