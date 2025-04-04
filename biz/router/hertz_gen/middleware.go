@@ -45,3 +45,8 @@ func _getmeetinginfoMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
+
+func _chatmeetingMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}

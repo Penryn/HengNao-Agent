@@ -21,6 +21,7 @@ func Register(r *server.Hertz) {
 		_api := root.Group("/api", _apiMw()...)
 		{
 			_meeting := _api.Group("/meeting", _meetingMw()...)
+			_meeting.GET("/chat", append(_chatmeetingMw(), hertz_gen.ChatMeeting)...)
 			_meeting.POST("/create", append(_createmeetingMw(), hertz_gen.CreateMeeting)...)
 			_meeting.GET("/info", append(_getmeetinginfoMw(), hertz_gen.GetMeetingInfo)...)
 			_meeting.GET("/list", append(_getmeetinglistMw(), hertz_gen.GetMeetingList)...)

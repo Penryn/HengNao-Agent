@@ -68,6 +68,7 @@ type Api struct {
 	Secret                string `yaml:"secret"`
 	GetRelevantHighlights string `yaml:"get_relevant_highlights"`
 	GetMeetingMinutes     string `yaml:"get_meeting_minutes"`
+	ChatMeeting           string `yaml:"chat_meeting"`
 }
 
 // GetConf gets configuration instance

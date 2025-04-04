@@ -3,9 +3,9 @@ package service
 import (
 	"bufio"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/cloudwego/hertz/pkg/common/json"
 	"meeting_agent/biz/dal/mysql"
 	"meeting_agent/biz/dal/redis"
 	"meeting_agent/biz/model"

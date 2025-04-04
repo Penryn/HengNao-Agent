@@ -72,9 +72,16 @@ message GetMeetingInfoReq {
 }
 
 message GetMeetingInfoResp {
-  MeetingInfo Info = 1 [(api.body) = "info"]; // 会议详情
+  MeetingInfo Info = 1 ; // 会议详情
 }
 
+message ChatMeetingReq {
+  string input = 1 [(api.body) = "input"]; // 聊天内容
+}
+
+message ChatMeetingResp {
+  string output = 1 ; // 聊天响应内容
+}
 
 service MeetingService {
   rpc GetRelevantHighlights(GetRelevantHighlightsReq) returns (GetRelevantHighlightsResp) {
@@ -82,6 +89,9 @@ service MeetingService {
   }
   rpc GetMeetingMinutes(GetMeetingMinutesReq) returns (GetMeetingMinutesResp) {
     option (api.get) = "/api/meeting/minutes";
+  }
+  rpc ChatMeeting(ChatMeetingReq) returns (ChatMeetingResp) {
+    option (api.get) = "/api/meeting/chat";
   }
   rpc CreateMeeting(CreateMeetingReq) returns (CreateMeetingResp) {
     option (api.post) = "/api/meeting/create";
