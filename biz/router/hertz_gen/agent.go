@@ -27,6 +27,7 @@ func Register(r *server.Hertz) {
 			_meeting.GET("/list", append(_getmeetinglistMw(), hertz_gen.GetMeetingList)...)
 			_meeting.GET("/minutes", append(_getmeetingminutesMw(), hertz_gen.GetMeetingMinutes)...)
 			_meeting.GET("/recommendation", append(_getrelevanthighlightsMw(), hertz_gen.GetRelevantHighlights)...)
+			_meeting.GET("/translate", append(_translatetextMw(), hertz_gen.TranslateText)...)
 		}
 	}
 }

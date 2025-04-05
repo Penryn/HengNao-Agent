@@ -20,10 +20,11 @@ var (
 type Config struct {
 	Env string
 
-	Hertz Hertz `yaml:"hertz"`
-	MySQL MySQL `yaml:"mysql"`
-	Redis Redis `yaml:"redis"`
-	Api   Api   `yaml:"api"`
+	Hertz  Hertz  `yaml:"hertz"`
+	MySQL  MySQL  `yaml:"mysql"`
+	Redis  Redis  `yaml:"redis"`
+	Api    Api    `yaml:"api"`
+	Aliyun Aliyun `yaml:"aliyun"`
 }
 
 type MySQL struct {
@@ -69,6 +70,11 @@ type Api struct {
 	GetRelevantHighlights string `yaml:"get_relevant_highlights"`
 	GetMeetingMinutes     string `yaml:"get_meeting_minutes"`
 	ChatMeeting           string `yaml:"chat_meeting"`
+}
+
+type Aliyun struct {
+	AccessKey    string `yaml:"access_key"`
+	AccessSecret string `yaml:"access_secret"`
 }
 
 // GetConf gets configuration instance

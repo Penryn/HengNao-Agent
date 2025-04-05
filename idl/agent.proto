@@ -79,8 +79,17 @@ message ChatMeetingReq {
 }
 
 message ChatMeetingResp {
-  string output = 1 ; // 聊天响应内容
 }
+
+message TranslateTextReq {
+  string Text = 1 [(api.body) = "text,required"]; // 待翻译文本
+  uint32 TargetLanguage = 2 [(api.body) = "target_language"]; // 目标语言
+}
+
+message TranslateTextResp {
+  string TranslatedText = 1 [(api.body) = "translated_text"]; // 翻译后的文本
+}
+
 
 service MeetingService {
   rpc GetRelevantHighlights(GetRelevantHighlightsReq) returns (GetRelevantHighlightsResp) {
@@ -100,5 +109,8 @@ service MeetingService {
   }
   rpc GetMeetingInfo(GetMeetingInfoReq) returns (GetMeetingInfoResp) {
     option (api.get) = "/api/meeting/info";
+  }
+  rpc TranslateText(TranslateTextReq) returns (TranslateTextResp) {
+    option (api.get) = "/api/meeting/translate";
   }
 }

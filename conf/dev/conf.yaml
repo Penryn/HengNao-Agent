@@ -28,9 +28,13 @@ redis:
   password: ""
   db: 0
 
+aliyun:
+  access_key: ""
+  access_secret: ""
+
 api:
   url : "https://www.das-ai.com/open/api/v2/agent/execute"
   key : "hengnaoMZrxRBybfan2PAoCP5w7"
-  secret : "p12vcw48birifr1h9b87ql678fbb8eqy"
+  secret : ""
   get_relevant_highlights : "b23472bd-5695-486a-b7bb-32498c816efe"
   chat_meeting: "e50c5a61-354f-4771-84a1-e60aeb06322f"
